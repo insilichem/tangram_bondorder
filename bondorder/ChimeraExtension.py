@@ -4,9 +4,6 @@
 
 from __future__ import print_function, division 
 import chimera
-from Midas.midas_text import addCommand, doExtensionFunc
-import prefs as _prefs
-
 
 class BondOrderExtension(chimera.extension.EMO):
 
