@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 
-from __future__ import print_function, division 
+from __future__ import print_function, division
 # Python stdlib
 import Tkinter as tk
 import Pmw
@@ -14,15 +14,13 @@ from chimera.widgets import MoleculeOptionMenu
 from bondorder.core import assign_bond_orders, draw_bond_orders
 
 ui = None  # singleton
-def showUI(callback=None):
+def showUI():
     if chimera.nogui:
         tk.Tk().withdraw()
     global ui
     if not ui:
         ui = BondOrderDialog()
     ui.enter()
-    if callback:
-        ui.addCallback(callback)
 
 
 class BondOrderDialog(PlumeBaseDialog):
@@ -36,7 +34,7 @@ class BondOrderDialog(PlumeBaseDialog):
         # GUI init
         self.title = 'Plume BondOrder'
         self.controller = None
-        
+
         # Fire up
         super(BondOrderDialog, self).__init__(resizable=False, *args, **kwargs)
 
@@ -53,7 +51,7 @@ class BondOrderDialog(PlumeBaseDialog):
                                          labelpos='w', items=['RDKit',
                                                               'OpenBabel',
                                                               'Single'])
-        self.ui_calculate_btn = tk.Button(self.ui_calculation, text='Go!', 
+        self.ui_calculate_btn = tk.Button(self.ui_calculation, text='Go!',
                                           command=self._cmd_calculate_btn)
         self.ui_calculation.grid(row=row, padx=5, pady=5, sticky='we')
         self.ui_calculation.columnconfigure(0, weight=1)
@@ -67,7 +65,7 @@ class BondOrderDialog(PlumeBaseDialog):
                                            validate=self._order_validator,
                                            labelpos='w', label_text='<Select one bond>')
         self.ui_order_fld['entry_state'] = 'disabled'
-        self.ui_order_btn = tk.Button(self.ui_edition, text='Write', 
+        self.ui_order_btn = tk.Button(self.ui_edition, text='Write',
                                       command=self._cmd_order_btn)
         self.ui_order_btn['state'] = 'disabled'
         self.ui_edition.grid(row=row, padx=5, pady=5, sticky='we')
@@ -79,17 +77,17 @@ class BondOrderDialog(PlumeBaseDialog):
     def Draw(self):
         m = self.ui_molecule.getvalue()
         draw_bond_orders(m)
-    
+
     def Close(self):  # Singleton mode
         global ui
         ui = None
         super(BondOrderDialog, self).Close()
-    
+
     def _cmd_order_btn(self, *args):
         order = self.ui_order_fld.getvalue()
         for bond in chimera.selection.currentBonds():
             bond.order = order
-    
+
     def _cmd_calculate_btn(self, *args):
         molecule = self.ui_molecule.getvalue()
         engine = self.ui_methods.getvalue()
@@ -99,7 +97,7 @@ class BondOrderDialog(PlumeBaseDialog):
             self.status('Could not compute automatically!', color='red', blankAfter=4)
         else:
             self.Draw()
-    
+
     def _cb_fill_order(self, *args, **kwargs):
         selected_bonds = chimera.selection.currentBonds()
         length = len(selected_bonds)
@@ -123,7 +121,7 @@ class BondOrderDialog(PlumeBaseDialog):
             self.ui_order_fld['label_text'] = '<More than one selected>'
             self.ui_order_fld.setvalue('')
             self.ui_order_btn['state'] = 'normal'
-    
+
     def _order_validator(self, value):
         try:
             value = float(value)
