@@ -2,13 +2,13 @@
 # encoding: utf-8
 
 
-from __future__ import print_function, division 
+from __future__ import print_function, division
 import chimera
 
 class BondOrderExtension(chimera.extension.EMO):
 
     def name(self):
-        return 'Plume BondOrder'
+        return 'Tangram BondOrder'
 
     def description(self):
         return "Bond order perception assignment and calculation"

@@ -9,7 +9,7 @@ import Pmw
 # Chimera stuff
 import chimera
 # Own
-from libplume.ui import PlumeBaseDialog, STYLES
+from libtangram.ui import TangramBaseDialog, STYLES
 from chimera.widgets import MoleculeOptionMenu, SortableTable
 from bondorder.core import assign_bond_orders, draw_bond_orders
 
@@ -24,17 +24,17 @@ def showUI():
     ui.enter()
 
 
-class BondOrderDialog(PlumeBaseDialog):
+class BondOrderDialog(TangramBaseDialog):
 
     buttons = ('Draw', 'Close')
     default = None
-    help = "https://github.com/insilichem/plume_bondorder"
+    help = "https://github.com/insilichem/tangram_bondorder"
     VERSION = '0.0.1'
-    VERSION_URL = "https://api.github.com/repos/insilichem/plume_bondorder/releases/latest"
+    VERSION_URL = "https://api.github.com/repos/insilichem/tangram_bondorder/releases/latest"
 
     def __init__(self, *args, **kwargs):
         # GUI init
-        self.title = 'Plume BondOrder'
+        self.title = 'Tangram BondOrder'
         self.controller = None
 
         # Fire up

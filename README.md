@@ -1,4 +1,4 @@
-# Plume BondOrder
+# Tangram BondOrder
 
 Automatic bond order perception for UCSF Chimera using several backend engines:
 
