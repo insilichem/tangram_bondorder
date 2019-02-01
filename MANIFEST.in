@@ -1,0 +1,2 @@
+include versioneer.py
+include bondorder/_version.py
